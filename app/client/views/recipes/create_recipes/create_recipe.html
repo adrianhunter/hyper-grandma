@@ -7,9 +7,15 @@
 
                 <div class="row">
                     <div class="col-md-4 col-md-offset-1">
-                        <div class="if-box">
+                        <div class="if-box if-action">
                                 <h3 class="text-center">Select the trigger:</h3>
-                                <div class="box-content"></div>
+                                <div class="box-content if-action">
+                                    <div class="text-center">
+                                        <h1 class="top10"><i class="fa fa-plus-circle" aria-hidden="true"></i></h1>
+                                        <h3 class="top0">Tap to add</h3>
+                                </div>
+                                </div>
+
                         </div>
                     </div>
 
@@ -20,9 +26,12 @@
                     </div>
 
                     <div class="col-md-4">
-                        <div class="if-box">
+                        <div class="if-box then-action">
                             <h3 class="text-center">Select the action:</h3>
-                            <div class="box-content"></div>
+                            <div class="box-content then-action text-center">
+                                <h1 class="top10"><i class="fa fa-plus-circle" aria-hidden="true"></i></h1>
+                                <h3 class="top0">Tap to add</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -35,5 +44,7 @@
             </div>
     </div>
 
+    {{> if_content}}
+    {{> then_content}}
 
 </template>
