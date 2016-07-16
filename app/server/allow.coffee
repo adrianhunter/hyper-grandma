@@ -29,6 +29,13 @@ Appliances.allow
 		true
 	remove: (userId, doc) ->
 		true
+ProgramOptions.allow
+	insert: (userId, doc) ->
+		true
+	update: (userId, doc, fields, modifier) ->
+		true
+	remove: (userId, doc) ->
+		true
 
 Attachments.allow
 	insert: (userId, doc) ->

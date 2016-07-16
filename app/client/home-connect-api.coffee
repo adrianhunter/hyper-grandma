@@ -42,6 +42,70 @@ getIconForAppliance = (type)->
 API_URL = 'https://api-preprod.home-connect.com/api/'
 
 Home_Connect.Api = {
+    getProgramOptions: (programkey,haId, cb)->
+        HTTP.get API_URL + "homeappliances/#{haId}/programs/available/#{programkey}", {
+            headers: getHeaders()
+        }, (e, r)->
+            if e
+                console.log e
+                return
+            if r?.content
+                content = JSON.parse r.content
+                console.log content
+                options = content?.data.options
+                currentProgramOptions = ProgramOptions.findOne programkey: programkey
+                if currentProgramOptions
+                    ProgramOptions.update({
+                        _id: currentProgramOptions._id
+                    },{
+                        $set: options: options
+
+                    })
+                else
+                    ProgramOptions.insert({
+                        programkey: programkey
+                        options: options
+                    })
+                
+                
+
+            cb e,r if cb
+
+#            currentPrograms = Programs.findOne({haId: haId})
+
+    selectProgram: (haId, cb)->
+        HTTP.get API_URL + "homeappliances/#{haId}/programs/selected", {
+            headers: getHeaders()
+
+        }, (e, r)->
+            if e then console.log e
+            cb e,r if cb
+
+    updateAppliancePrograms: ->
+        _.each Appliances.find().fetch(), (appliance, i)->
+            do ->
+                Meteor.setTimeout ->
+                    HTTP.get API_URL + "homeappliances/#{appliance.haId}/programs/available", {
+                        headers: getHeaders()
+                    }, (e, r)->
+                        if e then console.log e
+                        if r?.content
+                            content = JSON.parse r.content
+                            programs = content.data?.programs
+                            currentAppliance = Appliances.findOne haId: appliance.haId
+
+                            if currentAppliance
+                                Appliances.update({
+                                    _id: currentAppliance._id
+                                }, {
+                                    $set:
+                                        programs: programs
+                                })
+                , 1000 * i
+
+
+
+
     updateAppliances: (cb)->
         HTTP.get(API_URL + 'homeappliances', {
             headers: getHeaders()
@@ -52,12 +116,15 @@ Home_Connect.Api = {
 
                 if appliances
                     _.each appliances, (appliance)->
-                        appliance.icon = getIconForAppliance appliance.type
-                        currentAppliance = Appliances.findOne({hald: appliance.hald})
+                        icon = getIconForAppliance appliance.type
+                        appliance.icon = icon
+                        currentAppliance = Appliances.findOne({name: appliance.name})
                         if currentAppliance
                             Appliances.update({
                                 _id: currentAppliance._id
-                            },appliance)
+                            }, {
+                                $set: appliance
+                            })
                         else
                             Appliances.insert appliance
             else

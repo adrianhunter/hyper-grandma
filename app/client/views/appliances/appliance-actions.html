@@ -1,0 +1,77 @@
+<template name="appliance_actions">
+    <div class="appliance_actions">
+        <div class="container">
+
+            <div class="text-center">
+                <h1>{{appliance.name}}</h1>
+                {{#unless selectedProgram}}
+                <h3>what do you want to do?</h3>
+                {{/unless}}
+                {{#if selectedProgram}}
+                    <h3>how do you want to have your {{translateProgram selectedProgram}}?</h3>
+
+                {{/if}}
+            </div>
+
+            <div class="panel panel-default">
+
+                <div class="panel-body">
+                    {{#unless selectedProgram}}
+                        {{#each appliance.programs}}
+                            <div class="col-sm-3">
+                                <a class="btn btn-primary select-program" href="">
+                                    {{translateProgram key}}
+                                </a>
+                            </div>
+                        {{/each}}
+                    {{/unless}}
+
+                    {{#if selectedProgram}}
+                        {{> appliance_actions_options_form}}
+
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</template>
+
+<template name="appliance_actions_options_form">
+    <form id="program-options-form">
+
+        {{#each programOptions}}
+            <div class="form-group">
+                {{#if $eq type 'Boolean'}}
+                    <div class="togglebutton">
+                        <label>
+                            {{translateProgram key}}
+                            <input name="bar" type="checkbox">
+                        </label>
+                    </div>
+
+                {{/if}}
+                {{#if $eq type 'Int'}}
+                        <label for="select111" class="col-md-2 control-label">
+                            {{translateProgram key}}
+                        </label>
+
+                        <div class="col-md-10">
+                            <select id="select111" class="form-control" name="foo">
+                                {{#each constraintsArray}}
+                                    <option>{{this}}</option>
+
+                                {{/each}}
+                            </select>
+                        </div>
+
+                {{/if}}
+            </div>
+        {{/each}}
+
+        <button type="submit" class="btn btn-primary submit-options">Submit</button>
+    </form>
+</template>
