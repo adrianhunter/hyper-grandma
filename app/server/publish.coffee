@@ -5,3 +5,6 @@ Meteor.publish 'programs',->
 
 Meteor.publish 'programOptions',->
     return ProgramOptions.find()
+
+Meteor.publish 'recipes',->
+    return Recipes.find()

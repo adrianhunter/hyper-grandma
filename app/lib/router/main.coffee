@@ -27,7 +27,7 @@ Router.map ->
             @render('dashboard', {
                 data:
                     template: 'my_recipes'
-            #recipes: Recipes.find({user_id: Meteor.userId() },{sort: {createdAt: -1}}).fetch()
+                    recipes: Recipes.find({},{sort: {createdAt: -1}}).fetch()
             })
 
     @route "create_recipes",
@@ -36,5 +36,5 @@ Router.map ->
             @render('dashboard', {
                 data:
                     template: 'create_recipe'
-            #recipes: Recipes.find({user_id: Meteor.userId() },{sort: {createdAt: -1}}).fetch()
+                    recipes: Recipes.find({},{sort: {createdAt: -1}}).fetch()
             })

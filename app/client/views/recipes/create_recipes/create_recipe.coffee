@@ -1,3 +1,6 @@
+@ifDescriptionField = new ReactiveVar()
+@thenDescriptionField = new ReactiveVar()
+
 Template.create_recipe.events({
     'click .if-action': ->
         $('.modal-if').fadeIn()
