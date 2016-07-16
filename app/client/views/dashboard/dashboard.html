@@ -2,13 +2,18 @@
 	<div class="template-dashboard">
 		<div class="container">
 			<div class="row">
+                {{#unless isMobile.any}}
 				<div class="col-md-3">
+
 					{{> sideBar}}
 				</div>
+                {{/unless}}
 				<div class="col-md-9">
                     {{> UI.dynamic template=template}}
 
 				</div>
+
+
 			</div>
 		</div>
 	</div>
@@ -17,7 +22,10 @@
 
 <template name="appliancesContent">
 
-    <h1>Your appliances</h1>
+    <div class="text-center">
+        <h1 class="{{#if isMobile.any}} margin-top0 {{/if}}">Your appliances</h1>
+
+    </div>
     {{#each homeappliances}}
         {{> applianceCard}}
     {{/each}}
@@ -37,7 +45,10 @@
                 <h3>Status: <b>On</b></h3>
             </div>
             <div class="panel-body">
-                <a class="btn btn-raised btn-success left10" href="{{pathFor 'appliance-actions' haId=haId }}">See actions</a>
+                <div class="text-center">
+                    <a class="btn btn-raised btn-success left10" href="{{pathFor 'appliance-actions' haId=haId }}">See actions</a>
+
+                </div>
             </div>
         </div>
     </div>
@@ -46,8 +57,8 @@
 
 <template name="sideBar">
 
-    <div class="panel panel-info top50">
-        <div class="panel-heading text-center">Your appliances</div>
+    <div class="panel panel-info {{#unless isMobile.any}} top50 {{/unless}}">
+        <div class="panel-heading {{#unless isMobile.any}} text-center {{/unless}}">Your appliances</div>
         <div class="panel-body padding-top0">
             <li><a href="/dashboard"> <i class="fa fa-home" aria-hidden="true"></i> Your appliances</a></li>
             <li><a><i class="fa fa-plus" aria-hidden="true"></i> Add appliance</a></li>

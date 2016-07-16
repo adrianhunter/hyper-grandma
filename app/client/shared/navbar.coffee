@@ -1,6 +1,12 @@
 Template.navbar.events
-  'change #sliding-menu-controller': (e) ->
-    $('body')[ if e.currentTarget.checked then 'addClass' else 'removeClass' ] 'no-overflow'
+    'click .sliding-menu-controller': (e) ->
+        menu = $('.sliding-menu')
+        if menu.hasClass('show')
+            menu.removeClass('show')
+        else
+            menu.addClass('show')
 
-  'click .sliding-menu a': () ->
-    $('#sliding-menu-controller').prop 'checked', false
+
+
+    'click .sliding-menu a': () ->
+        $('#sliding-menu-controller').prop 'checked', false
