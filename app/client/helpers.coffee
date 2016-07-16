@@ -4,3 +4,6 @@ Template.registerHelper 'translateProgram', (key)->
 
 Template.registerHelper 'flattenKey', (key)->
     return key.replace(/\./g,'_')
+
+Template.registerHelper 'isMobile', ->
+    return isMobile

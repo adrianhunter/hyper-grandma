@@ -17,6 +17,15 @@ getPostHeaders = ()->
         Authorization: "Bearer #{user.accessToken}"
 
     }
+getStreamHeaders = ()->
+
+    user = Meteor.user()
+
+    return {
+        'Content-Type': 'text/event-stream'
+        Authorization: "Bearer #{user.accessToken}"
+
+    }
 
 getIconForAppliance = (type)->
     icons = [
@@ -51,7 +60,16 @@ getIconForAppliance = (type)->
 API_URL = 'https://api-preprod.home-connect.com/api/'
 
 Home_Connect.Api = {
+
+    registerEvent:(haId, cb)->
+        console.log 'register event'
+        HTTP.get API_URL + "homeappliances/#{haId}/events", {
+            headers: getStreamHeaders()
+        }, cb
+
     getProgramOptions: (programkey,haId, cb)->
+        console.log programkey, 'programkey'
+        console.log haId, 'haId'
         HTTP.get API_URL + "homeappliances/#{haId}/programs/available/#{programkey}", {
             headers: getHeaders()
         }, (e, r)->
@@ -63,18 +81,19 @@ Home_Connect.Api = {
                 console.log content
                 options = content?.data.options
                 currentProgramOptions = ProgramOptions.findOne programkey: programkey
-                if currentProgramOptions
-                    ProgramOptions.update({
-                        _id: currentProgramOptions._id
-                    },{
-                        $set: options: options
+                if options.length > 0
+                    if currentProgramOptions
+                        ProgramOptions.update({
+                            _id: currentProgramOptions._id
+                        },{
+                            $set: options: options
 
-                    })
-                else
-                    ProgramOptions.insert({
-                        programkey: programkey
-                        options: options
-                    })
+                        })
+                    else
+                        ProgramOptions.insert({
+                            programkey: programkey
+                            options: options
+                        })
                 
                 
 
@@ -83,7 +102,8 @@ Home_Connect.Api = {
 #            currentPrograms = Programs.findOne({haId: haId})
     
     startProgram:(haId, programkey, cb)->
-
+        console.log haId, 'haId'
+        console.log programkey, 'programkey'
         HTTP.put API_URL + "homeappliances/#{haId}/programs/active", {
             headers: getPostHeaders()
             data: data: key: programkey
@@ -138,6 +158,13 @@ Home_Connect.Api = {
                 , 1000 * i
 
 
+    updateApplianceProgramOptions:->
+        self = @
+        Appliances.find().forEach (appliance)->
+            if appliance.programs
+                do ->
+                    appliance.programs.forEach (program)->
+                        self.getProgramOptions appliance.haId, program.key
 
 
     updateAppliances: (cb)->

@@ -53,22 +53,8 @@
     }
   }
 
-  .sliding-menu
-  {
-    background: white;
-    display: none;
-    height: 100vh;
-    margin-left: -1px;
-    overflow: auto;
-    padding: 50px 6px 10px;
-    position: fixed;
-    transform: translateX(-100vw);
-    transition: 0.2s;
-    width: 100vw;;
-    z-index: 1;
-  }
 
-  #sliding-menu-controller:checked
+  #sliding-menu-controller.show
   {
     ~ .navbar-toggle
     {
@@ -102,11 +88,29 @@
       }
     }
 
-    ~ .sliding-menu
-    {
-      -webkit-transform: translateX(0);
-      -ms-transform: translateX(0);
-      transform: translateX(0);
-    }
+
   }
+}
+
+.sliding-menu.show
+{
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+}
+
+
+.sliding-menu
+{
+  background: white;
+  display: none;
+  height: 100vh;
+  margin-left: -1px;
+  overflow: auto;
+  padding: 50px 6px 10px;
+  position: fixed;
+  transform: translateX(-100vw);
+  transition: 0.2s;
+  width: 100vw;;
+  z-index: 1;
 }

@@ -3,27 +3,35 @@
     <div class="navbar navbar-inverse">
       <div class="container close-navbar">
         <div class="navbar-header">
-          <input type="checkbox" id="sliding-menu-controller" class="hide">
-          <label type="button" class="navbar-toggle" for="sliding-menu-controller">
-            <span class="icon"></span>
-          </label>
-          <div class="sliding-menu visible-xs">
-            <div class="panel panel-default">
+          <!--<input type="checkbox" id="sliding-menu-controller" class="hide">-->
+          <!--<label type="button" class="navbar-toggle" for="sliding-menu-controller">-->
+            <!--<span class="icon"></span>-->
+          <!--</label>-->
+            <a href="#" class="sliding-menu-controller">
+                <i class="fa fa-bars"></i>
+            </a>
+            <div class="sliding-menu visible-xs">
+            <div class="panel panel-info">
               {{#if User}}
                 <div class="panel-heading">{{niceName User._id}}</div>
-                <div class="list-group">
-                  <a class="list-group-item" href="{{pathFor 'profile'}}">{{_ "profile"}}</a>
-                  <a class="list-group-item" href="{{pathFor 'account'}}">{{_ "account"}}</a>
-                  <a class="list-group-item" href="{{pathFor 'notifications'}}">
-                    {{#if notificationCount}}
-                      <span class="badge bg-success">{{notificationCount}}</span>
-                    {{/if}}
-                    {{_ "notifications"}}
-                  </a>
-                  <a class="list-group-item" href="/sign-out">{{_ "signout"}}</a>
+                <div class="panel-body padding-top0">
+
+                    <li><a href="{{pathFor 'profile'}}"><i class="fa fa-user" aria-hidden="true"></i> {{_ "profile"}}</a></li>
+                    <li><a href="{{pathFor 'account'}}"><i class="fa fa-list-ol" aria-hidden="true"></i> {{_ "account"}}</a></li>
+                    <li><a href="{{pathFor 'notifications'}}"><i class="fa fa-envelope" aria-hidden="true"></i>
+                        {{#if notificationCount}}
+                            <span class="badge bg-success">{{notificationCount}}</span>
+                        {{/if}}
+                        {{_ "notifications"}}
+                    </a></li>
+                  <li><a href="/sign-out"><i class="fa fa-sign-out" aria-hidden="true"></i> {{_ "signout"}}</a></li>
                 </div>
+
               {{/if}}
             </div>
+              {{#if User}}
+                  {{> sideBar}}
+              {{/if}}
           </div>
           <a class="navbar-brand" href="{{#if User}}{{Config.dashboardRoute}}{{else}}{{Config.homeRoute}}{{/if}}">Hyper Home</a>
         </div>

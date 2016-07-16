@@ -16,10 +16,10 @@ Template.appliance_actions.events({
             programkey: @key
         })
 
-        if not cachedProgramOptions
+        if not cachedProgramOptions?.programs?.length > 0
             Home_Connect.Api.getProgramOptions @key,router.params.haId, (e,r)=>
-            if not e
-                SelectedProgam.set(@key)
+                if not e
+                    SelectedProgam.set(@key)
         else
             SelectedProgam.set(@key)
 
@@ -41,7 +41,6 @@ Template.appliance_actions_options_form.helpers({
         })
 
         if programOptions
-            console.log programOptions.options
             return programOptions.options
         else
             return []
@@ -79,12 +78,15 @@ Template.appliance_actions_options_form.events({
             if unit
                 myoption.unit = unit
             options.push(myoption)
+#
+#        Home_Connect.Api.selectProgram router.params.haId, SelectedProgam.get(), options, (e,r)->
+#            console.log e,r
+#            if not e
 
-        Home_Connect.Api.selectProgram router.params.haId, SelectedProgam.get(), options, (e,r)->
-            console.log e,r
-            if not e
-                Home_Connect.Api.startProgram router.params.haId, SelectedProgam.get(), (e,r)->
-                    
+        Home_Connect.Api.registerEvent router.params.haId, (e,r)->
+            console.log e,r, 'NEW EVENT!!!'
+        Home_Connect.Api.startProgram router.params.haId, SelectedProgam.get(), (e,r)->
+
 
     'click .cancel-options':(e)->
         e.preventDefault()
