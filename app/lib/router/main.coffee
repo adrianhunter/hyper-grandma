@@ -5,17 +5,10 @@ Router.map ->
 
   @route "dashboard",
     path: "/dashboard"
-    waitOn: ->
-      [
-        subs.subscribe 'posts'
-        subs.subscribe 'comments'
-        subs.subscribe 'attachments'
-      ]
-    data: ->
-      posts: Posts.find({},{sort: {createdAt: -1}}).fetch()
     action: ->
       @render('dashboard', {
         data:
+          template: 'appliancesContent'
           'homeappliances': [
             {
               'name': 'Backofen'
@@ -121,3 +114,22 @@ Router.map ->
 
       })
       return
+
+
+  @route "my_recipes",
+    path: "/my_recipes"
+    action: ->
+      @render('dashboard', {
+        data:
+          template: 'my_recipes'
+          #recipes: Recipes.find({user_id: Meteor.userId() },{sort: {createdAt: -1}}).fetch()
+      })
+
+  @route "create_recipes",
+    path: "/create_recipe"
+    action: ->
+      @render('dashboard', {
+        data:
+          template: 'create_recipe'
+          #recipes: Recipes.find({user_id: Meteor.userId() },{sort: {createdAt: -1}}).fetch()
+      })
