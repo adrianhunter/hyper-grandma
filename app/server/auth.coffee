@@ -9,7 +9,7 @@ OAuth.registerService 'home_connect', 2, null, (query) ->
     identity = {
         id: query.code
         login: 'fooo'
-        name:'home_connect_user'
+        name:'homeConnectUser'
     }
     emails = [
         {
@@ -20,19 +20,21 @@ OAuth.registerService 'home_connect', 2, null, (query) ->
     primaryEmail = _.findWhere(emails, primary: true)
 
     currentUser = Meteor.users.findOne({
-        username: 'home_connect_user'
+        username: identity.name
     })
 
     if not currentUser
         created = Accounts.createUser({
-            username: 'home_connect_user'
+            username: identity.name
             email : 'foo@foo.de'
             password : 'asdasd'
-#            home_connect_id: config.clientId
-            accessToken: accessToken
-            username: identity.login
         })
-        console.log(created)
+
+        Meteor.users.update({
+            username: identity.name
+        }, {
+            $set: accessToken: accessToken
+        })
 
     {
         serviceData:
@@ -66,15 +68,6 @@ getAccessToken = (query) ->
                 state: query.state
         )
     catch err
-        console.log 'fooo'
-        console.log err
-        console.log ({
-            code: query.code
-            grant_type: query.grant_type
-            client_id: config.clientId
-            redirect_uri: OAuth._redirectUri('home_connect', config)
-            state: query.state
-        })
 #        throw _.extend(new Error('Failed to complete OAuth handshake with Home_Connect. ' + err.message), response: err.response)
     if response.data.error
         # if the http response was a json object with an error attribute
