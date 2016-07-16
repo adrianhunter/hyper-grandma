@@ -2,10 +2,28 @@
     {{> create_recipe_modal}}
     <div class="text-center">
         <h1 class="text-center"> Welcome to your recipes!</h1>
-        <img class="square-lg swing" src="/img/cupcake.gif">
-        <h3> Seems like you still didn't create any recipe... yet! </h3>
-        <a class="btn btn-raised btn-success left10 create-recipe"><i class="fa fa-magic faa-flash animated" aria-hidden="true"></i> Create a recipe</a>
-        <a class="btn btn-raised btn-info left10"><i class="fa fa-shopping-basket faa-vertical animated" aria-hidden="true"></i> Find a recipe</a>
+
+        {{#if recipes}}
+            <img class="square-md swing" src="/img/cupcake.gif">
+            <div class="row">
+                {{#each recipes}}
+                        {{> recipe_card}}
+                {{/each}}
+                <div class="col-md-4">
+                    <div class="well text-center text-success create-recipe">
+                        <h4><i class="fa fa-plus" aria-hidden="true"></i> <br/> <b>Add recipe</b></h4>
+
+                    </div>
+
+                </div>
+            </div>
+        {{else}}
+            <img class="square-lg swing" src="/img/cupcake.gif">
+            <h3> Seems like you still didn't create any recipe... yet! </h3>
+            <a class="btn btn-raised btn-success left10 create-recipe"><i class="fa fa-magic faa-flash animated" aria-hidden="true"></i> Create a recipe</a>
+            <a class="btn btn-raised btn-info left10"><i class="fa fa-shopping-basket faa-vertical animated" aria-hidden="true"></i> Find a recipe</a>
+
+        {{/if}}
     </div>
 </template>
 
@@ -17,10 +35,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close btn-close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Create a recipe</h4>
+                    <!--<h4 class="modal-title">Create a recipe</h4>!-->
                 </div>
                 <div class="modal-body">
-                    {{> new_recipe_content}}
+                    {{> create_recipe}}
                 </div>
                 <div class="modal-footer top10">
                     <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
@@ -28,6 +46,19 @@
                 </div>
             </div>
         </div>
+    </div>
+
+</template>
+
+<template name="recipe_card">
+
+    <div class="col-md-4">
+        <div class="well">
+            <h4><i class="fa fa-cogs" aria-hidden="true"></i> <b>When:</b><br>{{{ifAction}}}: {{{ifDescription}}}</h4>
+            <h4><i class="fa fa-rocket" aria-hidden="true"></i> <b>Do</b><br> {{{thenAction}}}: {{{thenDescription}}}</h4>
+
+        </div>
+
     </div>
 
 </template>
