@@ -8,6 +8,7 @@ Template.atSignupLink.events({
         Meteor.loginWithHome_Connect({
             requestPermissions: [
                 'ControlAppliance',
+                'RemoteStart',
                 'Control',
                 'Oven-Control',
                 'Washer-Control',

@@ -4,7 +4,16 @@ getHeaders = ()->
     user = Meteor.user()
 
     return {
-        Accept: "application/vnd.bsh.sdk.v1+json",
+        Accept: "application/vnd.bsh.sdk.v1+json"
+        Authorization: "Bearer #{user.accessToken}"
+
+    }
+getPostHeaders = ()->
+
+    user = Meteor.user()
+
+    return {
+        'Content-Type': "application/vnd.bsh.sdk.v1+json"
         Authorization: "Bearer #{user.accessToken}"
 
     }
@@ -72,10 +81,35 @@ Home_Connect.Api = {
             cb e,r if cb
 
 #            currentPrograms = Programs.findOne({haId: haId})
+    
+    startProgram:(haId, programkey, cb)->
 
-    selectProgram: (haId, cb)->
-        HTTP.get API_URL + "homeappliances/#{haId}/programs/selected", {
-            headers: getHeaders()
+        HTTP.put API_URL + "homeappliances/#{haId}/programs/active", {
+            headers: getPostHeaders()
+            data: data: key: programkey
+
+        }, (e, r)->
+            if e then console.log e
+            cb e,r if cb
+
+    selectProgram: (haId,programkey, options, cb)->
+
+        ## filter bugged options
+        options = _.reject options, (opt)-> opt.key is "ConsumerProducts.CoffeeMaker.Option.CoffeeTemperature"
+
+
+        params =
+            data:
+                key: programkey
+                options: options
+
+        console.log params
+
+        
+
+        HTTP.put API_URL + "homeappliances/#{haId}/programs/selected", {
+            headers: getPostHeaders()
+            data: params
 
         }, (e, r)->
             if e then console.log e

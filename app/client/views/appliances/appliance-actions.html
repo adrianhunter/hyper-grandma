@@ -49,7 +49,7 @@
                     <div class="togglebutton">
                         <label>
                             {{translateProgram key}}
-                            <input name="bar" type="checkbox">
+                            <input name="{{flattenKey key}}" type="checkbox">
                         </label>
                     </div>
 
@@ -60,9 +60,24 @@
                         </label>
 
                         <div class="col-md-10">
-                            <select id="select111" class="form-control" name="foo">
+                            <select id="select111" class="form-control" data-unit="{{unit}}" name="{{flattenKey key}}">
                                 {{#each constraintsArray}}
-                                    <option>{{this}}</option>
+                                    <option >{{this}}</option>
+
+                                {{/each}}
+                            </select>
+                        </div>
+
+                {{/if}}
+                {{#if $eq type "Enum"}}
+                        <label for="select111" class="col-md-2 control-label">
+                            {{translateProgram key}}
+                        </label>
+
+                        <div class="col-md-10">
+                            <select id="select111" class="form-control" data-unit="{{unit}}" name="{{flattenKey key}}">
+                                {{#each constraints.allowedvalues}}
+                                    <option value="{{flattenKey this}}">{{translateProgram this}}</option>
 
                                 {{/each}}
                             </select>
@@ -72,6 +87,8 @@
             </div>
         {{/each}}
 
-        <button type="submit" class="btn btn-primary submit-options">Submit</button>
+        <button class="btn btn-primary cancel-options pull-left">Cancel</button>
+        <button type="submit" class="btn btn-primary submit-options pull-right">Submit</button>
+        <div class="clearfix"></div>
     </form>
 </template>
