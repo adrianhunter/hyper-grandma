@@ -1,9 +1,9 @@
 {
 
 	/*Config*/
-	"configName": "My App",
-	"configTitle": "Make Meteor Apps. Fast.",
-	"configSubtitle": "Create beautiful and functioning Meteor apps really quick",
+	"configName": "My hyper home",
+	"configTitle": "Make your Home Experience customized for you!",
+	"configSubtitle": "Easy, quick and customized",
 	
 	/*Home*/
 	"getstarted": "Get Started",
