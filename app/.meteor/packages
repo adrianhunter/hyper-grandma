@@ -72,3 +72,7 @@ spacebars
 check
 standard-minifier-css
 standard-minifier-js
+accounts-oauth
+http
+oauth2
+oauth
