@@ -21,6 +21,14 @@ Devices.allow
 		userId == doc.owner
 	remove: (userId, doc) ->
 		userId == doc.owner
+		
+Appliances.allow
+	insert: (userId, doc) ->
+		true
+	update: (userId, doc, fields, modifier) ->
+		true
+	remove: (userId, doc) ->
+		true
 
 Attachments.allow
 	insert: (userId, doc) ->
