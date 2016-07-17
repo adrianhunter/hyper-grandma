@@ -5,3 +5,5 @@ Meteor.publish 'programs',->
 
 Meteor.publish 'programOptions',->
     return ProgramOptions.find()
+Meteor.publish 'home_notifications',->
+    return HomeNotifications.find()

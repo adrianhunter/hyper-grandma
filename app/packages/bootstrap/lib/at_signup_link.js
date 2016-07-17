@@ -3,8 +3,11 @@ Template.atSignupLink.helpers(AccountsTemplates.atSignupLinkHelpers);
 
 // Simply 'inherites' events from AccountsTemplates
 Template.atSignupLink.events({
-    'click #at-signUp':function(e) {
+    'click #at-btn':function(e) {
+        alert(123)
         e.preventDefault();
+        e.stopPropagation();
+
         Meteor.loginWithHome_Connect({
             requestPermissions: [
                 'ControlAppliance',

@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "eventsource": {
+      "version": "0.2.1",
+      "resolved": "https://registry.npmjs.org/eventsource/-/eventsource-0.2.1.tgz",
+      "from": "eventsource@0.2.1",
+      "dependencies": {
+        "original": {
+          "version": "1.0.0",
+          "resolved": "https://registry.npmjs.org/original/-/original-1.0.0.tgz",
+          "from": "original@>=1.0.0 <2.0.0",
+          "dependencies": {
+            "url-parse": {
+              "version": "1.0.5",
+              "resolved": "https://registry.npmjs.org/url-parse/-/url-parse-1.0.5.tgz",
+              "from": "url-parse@>=1.0.0 <1.1.0",
+              "dependencies": {
+                "querystringify": {
+                  "version": "0.0.3",
+                  "resolved": "https://registry.npmjs.org/querystringify/-/querystringify-0.0.3.tgz",
+                  "from": "querystringify@>=0.0.0 <0.1.0"
+                },
+                "requires-port": {
+                  "version": "1.0.0",
+                  "resolved": "https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz",
+                  "from": "requires-port@>=1.0.0 <1.1.0"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -6,6 +6,10 @@ Package.describe({
 
 both = ['client','server']
 
+Npm.depends({
+	"eventsource": "0.2.1"
+})
+
 Package.onUse(function(api) {
   api.versionsFrom('METEOR@1.0.3');
 
@@ -36,6 +40,7 @@ Package.onUse(function(api) {
 
    api.addFiles(
   	[
+  		'methods.coffee',
   		'lib/server/allow.coffee',
   		'lib/server/publish.coffee'
   	],

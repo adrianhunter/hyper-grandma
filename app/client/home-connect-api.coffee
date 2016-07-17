@@ -8,6 +8,13 @@ getHeaders = ()->
         Authorization: "Bearer #{user.accessToken}"
 
     }
+authHeader = ()->
+    user = Meteor.user()
+
+    return {
+        Authorization: "Bearer #{user.accessToken}"
+
+    }
 getPostHeaders = ()->
 
     user = Meteor.user()
@@ -62,10 +69,33 @@ API_URL = 'https://api-preprod.home-connect.com/api/'
 Home_Connect.Api = {
 
     registerEvent:(haId, cb)->
-        console.log 'register event'
-        HTTP.get API_URL + "homeappliances/#{haId}/events", {
-            headers: getStreamHeaders()
-        }, cb
+        console.log 'register event for', haId
+        console.log headers: authHeader()
+        eventSource = new EventSource(API_URL + "homeappliances/#{haId}/events",{
+            headers: authHeader()
+        })
+        eventSource.onopen = (e,r)->
+            console.log e,r, 'onMESSAGE'
+        eventSource.addEventListener 'STATUS', ((e) ->
+            console.log 'new event message'
+            console.log e.data
+            return
+        ), false
+        eventSource.addEventListener 'EVENT', ((e) ->
+            console.log 'connection open'
+            return
+        ), false
+        eventSource.addEventListener 'error', ((e) ->
+            if e.readyState == EventSource.CLOSED
+                console.log 'connection closed'
+                # Connection was closed.
+            else
+            return
+        ), false
+
+#        HTTP.get API_URL + "homeappliances/#{haId}/events", {
+#            headers: getStreamHeaders()
+#        }, cb
 
     getProgramOptions: (programkey,haId, cb)->
         console.log programkey, 'programkey'

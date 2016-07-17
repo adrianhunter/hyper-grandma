@@ -51,11 +51,11 @@ if Meteor.isClient
             callback = options
             options = null
 
-        foo = Accounts.oauth.credentialRequestCompleteHandler
-        Accounts.oauth.credentialRequestCompleteHandler = (e,r)->
-            console.log e,r
-
-            return foo(e,r)
+#        foo = Accounts.oauth.credentialRequestCompleteHandler
+#        Accounts.oauth.credentialRequestCompleteHandler = (e,r)->
+#            console.log e,r
+#
+#            return foo(e,r)
         credentialRequestCompleteCallback = Accounts.oauth.credentialRequestCompleteHandler(callback)
 
         Home_Connect.requestCredential options, credentialRequestCompleteCallback
