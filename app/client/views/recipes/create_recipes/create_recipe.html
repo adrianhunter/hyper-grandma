@@ -11,8 +11,14 @@
                                 <h3 class="text-center">Select the trigger:</h3>
                                 <div class="box-content if-action">
                                     <div class="text-center">
+                                        {{#if ifField}}
+                                            <h4 class="top0"><b>{{ifField}}</b></h4>
+                                            <p class="top0">When:</p>
+                                            <h4 class="top0"><b>{{ifAction}}</b></h4>
+                                        {{else}}
                                         <h1 class="top10"><i class="fa fa-plus-circle" aria-hidden="true"></i></h1>
                                         <h3 class="top0">Tap to add</h3>
+                                        {{/if}}
                                 </div>
                                 </div>
 
@@ -29,14 +35,22 @@
                         <div class="if-box then-action">
                             <h3 class="text-center">Select the action:</h3>
                             <div class="box-content then-action text-center">
+                            {{#if thenField}}
+                                <h4 class="top0"><b>{{thenField}}</b></h4>
+                                <p class="top0">What:</p>
+                                <h4 class="top0"><b>{{{thenAction}}}</b></h4>
+
+                            {{else}}
                                 <h1 class="top10"><i class="fa fa-plus-circle" aria-hidden="true"></i></h1>
                                 <h3 class="top0">Tap to add</h3>
+                            {{/if}}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row text-center">
-                    <img src="img/ingredients.gif" class="fade-in top40">
+                    <img src="img/ingredients.gif" class="fade-in top40"> {{#if submitButton}}<a class="btn btn-raised btn-success pull-right top60 magic" data-content="This is a snackbar! Lorem lipsum dolor sit amet..." data-toggle="snackbar" data-timeout="0" style="margin-right:10px;">Magic!</a>{{/if}}
+                    <div class="clearfix"></div>
                 </div>
 
 

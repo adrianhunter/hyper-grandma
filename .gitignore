@@ -1,2 +1,4 @@
 .idea
 app/.meteor/dev_bundle
+
+app/settings.json
