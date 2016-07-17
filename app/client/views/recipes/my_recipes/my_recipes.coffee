@@ -15,7 +15,7 @@ Template.recipe_card.events
     'click .play-recipe':(e)->
         e.preventDefault()
         console.log 'play'
-        Meteor.call('registerEvents','SIEMENS-HN678G4S6-68A40E016875',()->
+        Meteor.call('registerEvents','BOSCH-HNG6764S6-68A40E003BEE',()->
             isPlaying.set(true)
         )
 Template.create_recipe_modal.events

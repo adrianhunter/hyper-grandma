@@ -173,6 +173,7 @@ Home_Connect.Api = {
             if r?.content
                 content = JSON.parse r.content
                 programs = content.data?.programs
+                console.log content
                 currentAppliance = Appliances.findOne haId: haId
 
                 if currentAppliance
@@ -195,7 +196,7 @@ Home_Connect.Api = {
                             content = JSON.parse r.content
                             programs = content.data?.programs
                             currentAppliance = Appliances.findOne haId: appliance.haId
-
+                            console.log content
                             if currentAppliance
                                 Appliances.update({
                                     _id: currentAppliance._id
@@ -222,6 +223,7 @@ Home_Connect.Api = {
             if r?.content
                 content = JSON.parse(r.content)
                 appliances = content.data?.homeappliances
+                console.log appliances
 
                 if appliances
                     _.each appliances, (appliance)->
