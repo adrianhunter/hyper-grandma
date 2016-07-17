@@ -18,6 +18,10 @@ Template.recipe_card.events
         Meteor.call('registerEvents','BOSCH-HNG6764S6-68A40E003BEE',()->
             isPlaying.set(true)
         )
+Template.recipe_notification_modal.events
+    'click .btn-close':->
+        $('.modal-recipe-notification').fadeOut()
+        
 Template.create_recipe_modal.events
 
 
@@ -37,7 +41,8 @@ do ->
                         console.log item
                         if item.key is 'BSH.Common.Status.DoorState'
                             if item.value is 'BSH.Common.EnumType.DoorState.Open'
-                                alert (123)
+                                $('.modal-recipe-notification').fadeIn()
+                                console.log 'ring phone!!!'
                                 Meteor.call 'makeCall'
 
 
