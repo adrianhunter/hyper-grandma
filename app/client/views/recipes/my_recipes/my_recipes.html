@@ -1,7 +1,7 @@
 <template name="my_recipes">
     {{> create_recipe_modal}}
     <div class="text-center">
-        <h1 class="text-center"> Welcome to your recipes!</h1>
+        <h1 class="text-center"> Your recipes!</h1>
 
         {{#if recipes}}
             <img class="square-md swing" src="/img/cupcake.gif">
@@ -21,7 +21,7 @@
             <img class="square-lg swing" src="/img/cupcake.gif">
             <h3> Seems like you still didn't create any recipe... yet! </h3>
             <a class="btn btn-raised btn-success left10 create-recipe"><i class="fa fa-magic faa-flash animated" aria-hidden="true"></i> Create a recipe</a>
-            <a class="btn btn-raised btn-info left10"><i class="fa fa-shopping-basket faa-vertical animated" aria-hidden="true"></i> Find a recipe</a>
+            <a href="/store_recipe" class="btn btn-raised btn-info left10"><i class="fa fa-shopping-basket faa-vertical animated" aria-hidden="true"></i> Find a recipe</a>
 
         {{/if}}
     </div>
@@ -56,6 +56,7 @@
         <div class="well">
             <h4><i class="fa fa-cogs" aria-hidden="true"></i> <b>When:</b><br>{{{ifAction}}}: {{{ifDescription}}}</h4>
             <h4><i class="fa fa-rocket" aria-hidden="true"></i> <b>Do</b><br> {{{thenAction}}}: {{{thenDescription}}}</h4>
+            <h3 class="text-success"><i class="fa fa-play" aria-hidden="true"></i></h3>
 
         </div>
 

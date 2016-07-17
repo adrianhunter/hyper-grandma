@@ -8,3 +8,6 @@ Meteor.publish 'programOptions',->
 
 Meteor.publish 'recipes',->
     return Recipes.find()
+
+Meteor.publish 'recipes_store',->
+    return RecipesStore.find()

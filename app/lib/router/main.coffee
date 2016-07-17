@@ -38,3 +38,12 @@ Router.map ->
                     template: 'create_recipe'
                     recipes: Recipes.find({},{sort: {createdAt: -1}}).fetch()
             })
+
+    @route "store_recipes",
+        path: "/store_recipe"
+        action: ->
+            @render('dashboard', {
+                data:
+                    template: 'store_recipe'
+                    recipes: RecipesStore.find({},{sort: {createdAt: -1}}).fetch()
+            })

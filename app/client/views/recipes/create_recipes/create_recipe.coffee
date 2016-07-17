@@ -21,7 +21,10 @@ Template.create_recipe.events({
             thenDescription: thenDescriptionField.get()
         }
         console.log recipe
-        Meteor.call 'insertRecipe', recipe
+        Meteor.call 'insertRecipe', recipe, (e,r) ->
+            Router.go '/my_recipes'
+
+
 
 })
 
@@ -68,7 +71,7 @@ Template.create_recipe.helpers({
         else if thenField.get() is 'Washing machine'
             thenDescriptionField.set('Start laundry')
         else if thenField.get() is ' Call'
-            thenDescriptionField.set('call <br/> +49 17657797523')
+            thenDescriptionField.set('+49 17657797523')
         else if thenField.get() is ' Oven'
             thenDescriptionField.set('Start program')
         else if thenField.get() is ' HUE Lights'
