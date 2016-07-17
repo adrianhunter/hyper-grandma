@@ -16,11 +16,11 @@ Template.create_recipe.events({
     'click .magic': ->
         recipe = {
             ifAction: IfField.get()
-            ifDescription: ifDescriptionField.get()
+            ifDescription: IfCondition.get() or ifDescriptionField.get()
             thenAction: thenField.get()
             thenDescription: thenDescriptionField.get()
+            haId: $('#oven').data('haid')
         }
-        console.log recipe
         Meteor.call 'insertRecipe', recipe, (e,r) ->
             Router.go '/my_recipes'
 
@@ -34,6 +34,8 @@ Template.create_recipe.helpers({
         IfField.get()
 
     ifAction: ->
+        if IfCondition.get()
+            return IfCondition.get()
         if IfField.get() is ' Coffee Machine'
             ifDescriptionField.set('is Done')
         else if IfField.get() is 'Google Calendar'

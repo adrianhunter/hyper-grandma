@@ -23,7 +23,7 @@ Home_Connect.requestCredential = (options, credentialRequestCompleteCallback) ->
     flatScope = _.map(scope, encodeURIComponent).join('+')
     loginStyle = OAuth._loginStyle('home_connect', config, options)
     
-    loginUrl = 'https://api-preprod.home-connect.com/security/oauth/authorize' + '?client_id=' + config.clientId + '&response_type=code' + '&scope=' + flatScope + '&redirect_uri=' + 'http://localhost:3000/_oauth/home_connect' + '&state=homeconnect_auth'
+    loginUrl = Meteor.settings.public.API_URL + 'security/oauth/authorize' + '?client_id=' + config.clientId + '&response_type=code' + '&scope=' + flatScope + '&redirect_uri=' + 'http://localhost:3000/_oauth/home_connect' + '&state=homeconnect_auth'
     # meetup box gets taller when permissions requested.
     height = 620
     if _.without(scope, 'basic').length

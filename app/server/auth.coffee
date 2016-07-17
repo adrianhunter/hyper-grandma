@@ -56,7 +56,7 @@ getAccessToken = (query) ->
         throw new (ServiceConfiguration.ConfigError)
     response = undefined
     try
-        response = HTTP.post('https://api-preprod.home-connect.com/security/oauth/token',
+        response = HTTP.post(Meteor.settings.public.API_URL + 'security/oauth/token',
             headers:
                 Accept: 'application/json'
                 'User-Agent': userAgent

@@ -16,12 +16,12 @@ Template.appliance_actions.events({
             programkey: @key
         })
 
-        if not cachedProgramOptions?.programs?.length > 0
-            Home_Connect.Api.getProgramOptions @key,router.params.haId, (e,r)=>
-                if not e
-                    SelectedProgam.set(@key)
-        else
-            SelectedProgam.set(@key)
+#        if not cachedProgramOptions?.programs?.length > 0
+#            Home_Connect.Api.getProgramOptions @key,router.params.haId, (e,r)=>
+#                if not e
+#                    SelectedProgam.set(@key)
+#        else
+        SelectedProgam.set(@key)
 
 
 })
@@ -83,8 +83,6 @@ Template.appliance_actions_options_form.events({
 #            console.log e,r
 #            if not e
 
-        Home_Connect.Api.registerEvent router.params.haId, (e,r)->
-            console.log e,r, 'NEW EVENT!!!'
         Home_Connect.Api.startProgram router.params.haId, SelectedProgam.get(), (e,r)->
 
 

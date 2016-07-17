@@ -7,9 +7,11 @@
           <!--<label type="button" class="navbar-toggle" for="sliding-menu-controller">-->
             <!--<span class="icon"></span>-->
           <!--</label>-->
-            <a href="#" class="sliding-menu-controller">
-                <i class="fa fa-bars"></i>
-            </a>
+            {{#if isMobile.any}}
+                <a href="#" class="sliding-menu-controller">
+                    <i class="fa fa-bars"></i>
+                </a>
+            {{/if}}
             <div class="sliding-menu visible-xs">
             <div class="panel panel-info">
               {{#if User}}

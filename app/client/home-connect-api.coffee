@@ -64,7 +64,7 @@ getIconForAppliance = (type)->
     return (_.find icons, (icon)->
         return icon.type is type
     )?.icon
-API_URL = 'https://api-preprod.home-connect.com/api/'
+API_URL = Meteor.settings.public.API_URL + 'api/'
 
 Home_Connect.Api = {
 
@@ -164,6 +164,24 @@ Home_Connect.Api = {
         }, (e, r)->
             if e then console.log e
             cb e,r if cb
+
+    updateProgramsForOneAppliance:(haId)->
+        HTTP.get API_URL + "homeappliances/#{haId}/programs/available", {
+            headers: getHeaders()
+        }, (e, r)->
+            if e then console.log e
+            if r?.content
+                content = JSON.parse r.content
+                programs = content.data?.programs
+                currentAppliance = Appliances.findOne haId: haId
+
+                if currentAppliance
+                    Appliances.update({
+                        _id: currentAppliance._id
+                    }, {
+                        $set:
+                            programs: programs
+                    })
 
     updateAppliancePrograms: ->
         _.each Appliances.find().fetch(), (appliance, i)->

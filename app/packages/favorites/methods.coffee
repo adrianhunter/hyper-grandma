@@ -10,9 +10,8 @@ Meteor.methods({
                 Authorization: "Bearer #{user.accessToken}"
 
             }
-        API_URL = 'https://api-preprod.home-connect.com/api/'
 
-        eventSource = new EventSource(API_URL + "homeappliances/#{haId}/events",{
+        eventSource = new EventSource(Meteor.settings.public.API_URL + "api/homeappliances/#{haId}/events",{
             headers: authHeader()
         })
         eventSource.onopen = (e,r)->

@@ -9,6 +9,7 @@
                 </div>
 
                 <div class="modal-body">
+                    {{#unless ifField}}
                     <div class="row">
                         <div class="col-md-4">
                             <div class="well text-center" data="Google calendar">
@@ -36,7 +37,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="well text-center">
+                            <div class="well text-center" data-haid="BOSCH-CTL636ES6-68A40E003BF2" id="coffee-machine">
                                 <i class="fa fa-coffee" aria-hidden="true"></i> Coffee Machine
                             </div>
                         </div>
@@ -46,7 +47,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="well text-center">
+                            <div class="well text-center" id="oven" data-haid="SIEMENS-HN678G4S6-68A40E016875">
                                 <i class="fa fa-h-square" aria-hidden="true"></i> Oven
                             </div>
                         </div>
@@ -65,6 +66,19 @@
 
                         </div>
                     </div>
+                    {{/unless}}
+                    {{#if ifField}}
+                        <h3>Select the Event type</h3>
+                        <div class="form-group">
+                            <select id="select-if-condition" class="form-control">
+                                    <option value="open">Open</option>
+                                    <option value="close">Close</option>
+                                    <option value="done">Done</option>
+
+                            </select>
+                        </div>
+
+                    {{/if}}
                 </div>
 
                 <div class="modal-footer top10">
